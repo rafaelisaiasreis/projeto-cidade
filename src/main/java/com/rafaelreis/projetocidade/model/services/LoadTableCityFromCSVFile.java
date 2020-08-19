@@ -6,6 +6,7 @@ import com.rafaelreis.projetocidade.model.DTO.CityDTO;
 import com.rafaelreis.projetocidade.model.entities.City;
 import com.rafaelreis.projetocidade.model.repositories.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.Reader;
@@ -16,7 +17,8 @@ import java.util.List;
 @Service
 public class LoadTableCityFromCSVFile {
 
-    private static final String PATH_TO_CITIES_CSV_FILE = "src/main/resources/static/grupo-de-cidades.csv";
+    @Value("${projeto.cidade.csv.path}")
+    private String pathToCitiesCsvFile;
 
     @Autowired
     private CityRepository cidadeRepository;
@@ -33,7 +35,7 @@ public class LoadTableCityFromCSVFile {
 
     private List<CityDTO> csvToBean() {
         try (Reader reader = Files.newBufferedReader(
-                Paths.get(PATH_TO_CITIES_CSV_FILE))) {
+                Paths.get(pathToCitiesCsvFile))) {
             CsvToBean<CityDTO> csvToBean = new CsvToBeanBuilder<CityDTO>(reader)
                     .withType(CityDTO.class)
                     .withIgnoreLeadingWhiteSpace(true)
