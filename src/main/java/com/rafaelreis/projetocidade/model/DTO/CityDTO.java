@@ -1,4 +1,4 @@
-package com.rafaelreis.projetocidade.model.entities;
+package com.rafaelreis.projetocidade.model.DTO;
 
 import com.opencsv.bean.CsvBindByName;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CidadeDTO {
+public class CityDTO {
 
   @CsvBindByName(column = "ibge_id")
   private Long ibgeId;
@@ -25,10 +25,10 @@ public class CidadeDTO {
   private String capital;
 
   @CsvBindByName(column = "lon")
-  private Long longitude;
+  private Double longitude;
 
   @CsvBindByName(column = "lat")
-  private Long latitude;
+  private Double latitude;
 
   @CsvBindByName(column = "no_accents")
   private String noAccents;
