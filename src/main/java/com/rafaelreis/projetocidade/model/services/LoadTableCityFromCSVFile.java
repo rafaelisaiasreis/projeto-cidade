@@ -16,6 +16,8 @@ import java.util.List;
 @Service
 public class LoadTableCityFromCSVFile {
 
+    private static final String PATH_TO_CITIES_CSV_FILE = "src/main/resources/static/grupo-de-cidades.csv";
+
     @Autowired
     private CityRepository cidadeRepository;
 
@@ -23,7 +25,7 @@ public class LoadTableCityFromCSVFile {
         List<CityDTO> citiesDTOGroup = csvToBean();
         try {
             citiesDTOGroup.parallelStream().forEach(
-                    cidade -> cidadeRepository.saveAndFlush(City.parseDtoToCidadeObject(cidade)));
+                    city -> cidadeRepository.saveAndFlush(City.parseDtoToCityObject(city)));
         } catch (Exception ex) {
             throw new RuntimeException("Load city table failed!");
         }
@@ -31,7 +33,7 @@ public class LoadTableCityFromCSVFile {
 
     private List<CityDTO> csvToBean() {
         try (Reader reader = Files.newBufferedReader(
-                Paths.get("src/main/resources/static/grupo-de-cidades.csv"))) {
+                Paths.get(PATH_TO_CITIES_CSV_FILE))) {
             CsvToBean<CityDTO> csvToBean = new CsvToBeanBuilder<CityDTO>(reader)
                     .withType(CityDTO.class)
                     .withIgnoreLeadingWhiteSpace(true)

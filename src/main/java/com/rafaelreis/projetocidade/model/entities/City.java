@@ -44,20 +44,20 @@ public class City {
   @Column(name = "mesoregion")
   private String mesoregion;
 
-  public static City parseDtoToCidadeObject(CityDTO cidadeDTO){
-    City novaCidade = City.builder()
-            .ibgeId(cidadeDTO.getIbgeId())
-            .uf(cidadeDTO.getUf())
-            .name(cidadeDTO.getName())
-            .capital(cidadeDTO.getCapital().equalsIgnoreCase("true"))
-            .longitude(cidadeDTO.getLongitude())
-            .latitude(cidadeDTO.getLatitude())
-            .noAccents(cidadeDTO.getNoAccents())
-            .alternativeNames(cidadeDTO.getAlternativeNames())
-            .microRegion(cidadeDTO.getMicroRegion())
-            .mesoregion(cidadeDTO.getMesoregion())
+  public static City parseDtoToCityObject(CityDTO cityDTO){
+    City newCity = City.builder()
+            .ibgeId(cityDTO.getIbgeId())
+            .uf(cityDTO.getUf())
+            .name(cityDTO.getName())
+            .capital(cityDTO.getCapital().equalsIgnoreCase("true"))
+            .longitude(cityDTO.getLongitude())
+            .latitude(cityDTO.getLatitude())
+            .noAccents(cityDTO.getNoAccents())
+            .alternativeNames(cityDTO.getAlternativeNames())
+            .microRegion(cityDTO.getMicroRegion())
+            .mesoregion(cityDTO.getMesoregion())
             .build();
-    return novaCidade;
+    return newCity;
   }
 
 }
