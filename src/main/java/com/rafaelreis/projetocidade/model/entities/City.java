@@ -1,14 +1,12 @@
 package com.rafaelreis.projetocidade.model.entities;
 
-import com.rafaelreis.projetocidade.model.DTO.CityDTO;
+import com.rafaelreis.projetocidade.model.DTO.CityCsvFileDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "city")
 @Data
@@ -18,6 +16,9 @@ import javax.persistence.Id;
 public class City {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
   private Long ibgeId;
 
   private String uf;
@@ -44,7 +45,7 @@ public class City {
   @Column(name = "mesoregion")
   private String mesoregion;
 
-  public static City parseDtoToCityObject(CityDTO cityDTO){
+  public static City parseDtoToCityObject(CityCsvFileDTO cityDTO){
     City newCity = City.builder()
             .ibgeId(cityDTO.getIbgeId())
             .uf(cityDTO.getUf())

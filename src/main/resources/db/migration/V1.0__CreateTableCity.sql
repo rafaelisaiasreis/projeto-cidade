@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS city(
-ibge_id bigint primary key,
+id bigint primary key auto_increment,
+ibge_id bigint unique,
 uf varchar(2),
 name varchar(60),
 capital tinyint(1),
