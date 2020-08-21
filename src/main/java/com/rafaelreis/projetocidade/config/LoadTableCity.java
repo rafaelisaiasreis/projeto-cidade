@@ -1,6 +1,6 @@
 package com.rafaelreis.projetocidade.config;
 
-import com.rafaelreis.projetocidade.model.services.LoadTableCityFromCSVFile;
+import com.rafaelreis.projetocidade.services.LoadTableCityFromCSVFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;

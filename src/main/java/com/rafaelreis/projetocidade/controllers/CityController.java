@@ -2,9 +2,11 @@ package com.rafaelreis.projetocidade.controllers;
 
 import com.rafaelreis.projetocidade.model.DTO.CitiesPerStateDTO;
 import com.rafaelreis.projetocidade.model.DTO.CityDTO;
+import com.rafaelreis.projetocidade.model.DTO.RegisterCountDTO;
 import com.rafaelreis.projetocidade.model.DTO.StatesWithMostAndLessCitiesDTO;
 import com.rafaelreis.projetocidade.model.entities.City;
-import com.rafaelreis.projetocidade.model.services.CityService;
+import com.rafaelreis.projetocidade.repositories.CityRepository;
+import com.rafaelreis.projetocidade.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ public class CityController {
 
     @Autowired
     private CityService cityService;
+    @Autowired
+    private CityRepository cityRepository;
 
     @GetMapping("/{ibgeId}")
     public ResponseEntity<City> getCityByIbgeId(@PathVariable Long ibgeId) {
@@ -30,7 +34,7 @@ public class CityController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping
+    @GetMapping("/capitals")
     public ResponseEntity<List<City>> getAllCapitalsOrderByName(
             @RequestParam(name = "capital") Boolean capital) {
         List<City> allCapitalsOrderByName =
@@ -38,27 +42,27 @@ public class CityController {
         return ResponseEntity.ok(allCapitalsOrderByName);
     }
 
-    @GetMapping("/state")
+    @GetMapping("/states")
     public ResponseEntity<List<City>> getCitiesByUF(@RequestParam(name = "uf") String uf) {
         List<City> allCapitalsOrderByName =
                 cityService.findAllCitiesByUF(uf);
         return ResponseEntity.ok(allCapitalsOrderByName);
     }
 
-    @GetMapping("/states-most-less-cities")
+    @GetMapping("/states/most-less-cities")
     public ResponseEntity<StatesWithMostAndLessCitiesDTO> getStatesWithMoreAndLessCities() {
         StatesWithMostAndLessCitiesDTO statesWithMostAndLessCities =
                 cityService.getStatesWithMostAndLessCities();
         return ResponseEntity.ok(statesWithMostAndLessCities);
     }
 
-    @GetMapping("/cities-per-state")
+    @GetMapping("/per-state")
     public ResponseEntity<List<CitiesPerStateDTO>> getCitiesPerState() {
         List<CitiesPerStateDTO> numberOfCitiesPerState = cityService.getNumberOfCitiesPerState();
         return ResponseEntity.ok(numberOfCitiesPerState);
     }
 
-    @GetMapping("/searchasdhuas")
+    @GetMapping("/filter")
     public ResponseEntity<?> searchWithFilter(@RequestParam(name = "column") String column,
                                               @RequestParam(name = "keyword") String keyword) {
         List<City> cities = cityService.filterCityByColumnAndKeyWord(column, keyword);
@@ -68,10 +72,25 @@ public class CityController {
         return ResponseEntity.ok(cities);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/registers-per-column")
     public ResponseEntity<?> getRecordsByColumns(@RequestParam(name = "column") String column){
         Long recordsByColumn = cityService.getRecordsByColumn(column);
         return ResponseEntity.ok(recordsByColumn);
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<?> registerCount() {
+        RegisterCountDTO registerCount = cityService.getRegisterCount();
+        return ResponseEntity.ok(registerCount);
+    }
+
+    @GetMapping("/most-distanced")
+    public ResponseEntity<List<City>> mostDistancedCities(){
+        List<City> cities = cityService.mostDistancedCities();
+        if (cities.size() > 0){
+            return ResponseEntity.ok(cities);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping

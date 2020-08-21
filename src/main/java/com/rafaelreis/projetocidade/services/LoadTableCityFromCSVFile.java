@@ -1,10 +1,10 @@
-package com.rafaelreis.projetocidade.model.services;
+package com.rafaelreis.projetocidade.services;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.rafaelreis.projetocidade.model.DTO.CityCsvFileDTO;
 import com.rafaelreis.projetocidade.model.entities.City;
-import com.rafaelreis.projetocidade.model.repositories.CityRepository;
+import com.rafaelreis.projetocidade.repositories.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

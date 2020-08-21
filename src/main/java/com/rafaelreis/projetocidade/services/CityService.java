@@ -1,16 +1,19 @@
-package com.rafaelreis.projetocidade.model.services;
+package com.rafaelreis.projetocidade.services;
 
 import com.rafaelreis.projetocidade.model.DTO.CitiesPerStateDTO;
 import com.rafaelreis.projetocidade.model.DTO.CityDTO;
+import com.rafaelreis.projetocidade.model.DTO.RegisterCountDTO;
 import com.rafaelreis.projetocidade.model.DTO.StatesWithMostAndLessCitiesDTO;
 import com.rafaelreis.projetocidade.model.entities.City;
 import com.rafaelreis.projetocidade.model.projection.CitiesPerStateProjection;
-import com.rafaelreis.projetocidade.model.projection.RecordsProjection;
-import com.rafaelreis.projetocidade.model.repositories.CityRepository;
+import com.rafaelreis.projetocidade.repositories.CityCustomRepository;
+import com.rafaelreis.projetocidade.repositories.CityRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,6 +23,8 @@ public class CityService {
 
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private CityCustomRepository cityCustomRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -65,16 +70,31 @@ public class CityService {
     }
 
     public List<City> filterCityByColumnAndKeyWord(String column, String keyWord) {
-        return cityRepository.findCitiesFilterByColumnAndKeyWord(column, keyWord);
+        return cityCustomRepository.filterCityByColumnAndKeyWord(column, keyWord);
     }
 
     public Long getRecordsByColumn(String column) {
-        Optional<RecordsProjection> totalRegistersByColumn =
-                cityRepository.findTotalRegistersByColumn(column);
-        if (totalRegistersByColumn.isEmpty()) {
-            return 0L;
+        return cityCustomRepository.filterCityByColumnAndKeyWord(column);
+    }
+
+    public RegisterCountDTO getRegisterCount(){
+        Long count = cityRepository.count();
+        return new RegisterCountDTO(count);
+    }
+
+    public List<City> mostDistancedCities(){
+        List<City> citiesGroup = cityRepository.findAll();
+        if (citiesGroup.size() > 0){
+            List<City> mostDistanced = new ArrayList<>();
+            City max = citiesGroup.stream().max(Comparator.comparing(City::getLongitude)
+                    .thenComparing(City::getLatitude)).orElse(null);
+            City min = citiesGroup.stream().min(Comparator.comparing(City::getLongitude)
+                    .thenComparing(City::getLatitude)).orElse(null);
+            mostDistanced.add(max);
+            mostDistanced.add(min);
+            return mostDistanced;
         }
-        return totalRegistersByColumn.get().getRecords();
+        return new ArrayList<>();
     }
 
 }

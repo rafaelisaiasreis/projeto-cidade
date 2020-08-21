@@ -1,6 +1,6 @@
 package com.rafaelreis.projetocidade.model.projection;
 
-import com.rafaelreis.projetocidade.model.repositories.CityRepository;
+import com.rafaelreis.projetocidade.repositories.CityRepository;
 
 /**
  * Projection that returns information about column records
