@@ -25,16 +25,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
   public ResponseEntity<Object> handleDomainException(DomainException ex, WebRequest request) {
     ErrorMessage buildResponse = ErrorMessage.builder().status(HttpStatus.BAD_REQUEST.value())
         .title(ex.getMessage()).dateTime(LocalDateTime.now()).build();
-    return handleExceptionInternal(ex, buildResponse, new HttpHeaders(), HttpStatus.BAD_GATEWAY,
+    return handleExceptionInternal(ex, buildResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST,
         request);
   }
 
   @ExceptionHandler(CityNotFountException.class)
-  public ResponseEntity<Object> handleCityNotFoundException(DomainException ex,
+  public ResponseEntity<Object> handleCityNotFoundException(CityNotFountException ex,
       WebRequest request) {
     ErrorMessage buildResponse = ErrorMessage.builder().status(HttpStatus.NOT_FOUND.value())
         .title(ex.getMessage()).dateTime(LocalDateTime.now()).build();
-    return handleExceptionInternal(ex, buildResponse, new HttpHeaders(), HttpStatus.BAD_GATEWAY,
+    return handleExceptionInternal(ex, buildResponse, new HttpHeaders(), HttpStatus.NOT_FOUND,
         request);
   }
 

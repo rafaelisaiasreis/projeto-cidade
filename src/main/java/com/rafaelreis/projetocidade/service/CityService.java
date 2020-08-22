@@ -36,7 +36,7 @@ public class CityService {
 
   public City findCityByIbgeId(Long ibgeId) {
     return cityRepository.findByIbgeId(ibgeId)
-        .orElseThrow(() -> new RuntimeException("City not found"));
+        .orElseThrow(() -> new CityNotFountException("City not found"));
   }
 
   public City addNewCity(CityDTO newCity) {
@@ -78,15 +78,25 @@ public class CityService {
   }
 
   public List<City> filterCityByFieldAndKeyWord(String field, String keyWord) {
-    List<City> cities = cityCustomRepository.filterCityByFieldAndKeyWord(field, keyWord);
-    if (cities.isEmpty()){
+    List<City> cities = new ArrayList<>();
+    try{
+      cities = cityCustomRepository.filterCityByFieldAndKeyWord(field, keyWord);
+      if (cities.isEmpty()){ throw new RuntimeException(); }
+    } catch (Exception ex){
       throw new CityNotFountException("Could not find a city from the filters");
     }
+
    return cities;
   }
 
   public Long getRecordsByField(String field) {
-    return cityCustomRepository.filterDistinctRegisterFromField(field);
+    Long count = 0L;
+    try{
+      count = cityCustomRepository.filterDistinctRegisterFromField(field);
+    } catch (Exception ex) {
+      throw new CityNotFountException("Could not find a city from the filters");
+    }
+    return count;
   }
 
   public RegisterCountDTO getRegisterCount() {

@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class CityDTO {
 
-    @NotBlank
+
     private Long ibgeId;
 
     @Size(max = 2)

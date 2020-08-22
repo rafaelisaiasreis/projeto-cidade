@@ -24,7 +24,8 @@ public class LoadTableCity {
             try{
                 loadTableCityFromCSVFile.load();
             } catch (Exception ex){
-                throw new RuntimeException("Could not load table city from CSV file");
+                log.error("Could not load table city from CSV file");
+                return;
             }
 
             LocalDateTime finish = LocalDateTime.now();
