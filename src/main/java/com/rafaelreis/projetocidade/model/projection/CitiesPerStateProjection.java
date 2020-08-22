@@ -1,6 +1,6 @@
 package com.rafaelreis.projetocidade.model.projection;
 
-import com.rafaelreis.projetocidade.repositories.CityRepository;
+import com.rafaelreis.projetocidade.model.repository.CityRepository;
 
 /**
  * Projection that returns information about cities per state

@@ -1,4 +1,4 @@
-package com.rafaelreis.projetocidade.exceptions;
+package com.rafaelreis.projetocidade.exception;
 
 import lombok.Builder;
 import lombok.Data;

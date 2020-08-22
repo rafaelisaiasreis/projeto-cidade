@@ -1,6 +1,6 @@
 package com.rafaelreis.projetocidade.config;
 
-import com.rafaelreis.projetocidade.services.LoadTableCityFromCSVFile;
+import com.rafaelreis.projetocidade.service.LoadTableCityFromCSVFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -21,7 +21,11 @@ public class LoadTableCity {
             LocalDateTime start = LocalDateTime.now();
             log.info("Start load table city...Time: {}", start);
 
-            loadTableCityFromCSVFile.load();
+            try{
+                loadTableCityFromCSVFile.load();
+            } catch (Exception ex){
+                throw new RuntimeException("Could not load table city from CSV file");
+            }
 
             LocalDateTime finish = LocalDateTime.now();
             log.info("Finish load table city...Time: {} - Duration: {}", finish,

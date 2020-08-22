@@ -1,4 +1,4 @@
-package com.rafaelreis.projetocidade.repositories;
+package com.rafaelreis.projetocidade.model.repository;
 
 import com.rafaelreis.projetocidade.model.entities.City;
 import com.rafaelreis.projetocidade.model.projection.CitiesPerStateProjection;
