@@ -1,5 +1,5 @@
 <h4 align="center">
-<img src="/src/main/resources/static/cities.svg" width="250px" /><br>
+<img src="/src/main/resources/static/cities.svg" width="300px" /><br>
  <b>Projeto Cidades!!!</b> 
 </h4>
 <p align="center">
