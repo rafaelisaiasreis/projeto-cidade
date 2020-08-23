@@ -75,7 +75,7 @@ Após importa o projeto para sua IDE, basta ir até a classe `ProjetoCidadeAppli
 
 ### :memo: Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE.md) para mais detalhes.
 
 
 Feito com ❤️**Rafael Reis**:wave:
