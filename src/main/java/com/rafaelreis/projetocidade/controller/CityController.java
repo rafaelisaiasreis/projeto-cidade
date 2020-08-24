@@ -72,8 +72,8 @@ public class CityController {
 
   @ApiOperation(value = "Get a total of registers filter by field name")
   @GetMapping("/registers-per-column")
-  public ResponseEntity<?> getRecordsByColumns(@RequestParam(name = "field") String field) {
-    Long recordsByColumn = cityService.getRecordsByField(field);
+  public ResponseEntity<RegisterCountDTO> getRecordsByColumns(@RequestParam(name = "field") String field) {
+    RegisterCountDTO recordsByColumn = cityService.getRecordsByField(field);
     return ResponseEntity.ok(recordsByColumn);
   }
 

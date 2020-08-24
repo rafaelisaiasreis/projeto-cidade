@@ -89,14 +89,15 @@ public class CityService {
    return cities;
   }
 
-  public Long getRecordsByField(String field) {
-    Long count = 0L;
+  public RegisterCountDTO getRecordsByField(String field) {
+    RegisterCountDTO registerCountDTO = new RegisterCountDTO();
     try{
-      count = cityCustomRepository.filterDistinctRegisterFromField(field);
+      Long count = cityCustomRepository.filterDistinctRegisterFromField(field);
+      registerCountDTO.setTotalRegisters(count);
     } catch (Exception ex) {
       throw new CityNotFountException("Could not find a city from the filters");
     }
-    return count;
+    return registerCountDTO;
   }
 
   public RegisterCountDTO getRegisterCount() {
