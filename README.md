@@ -1,5 +1,5 @@
 <h4 align="center">
-<img src="src/main/resources/digest/cities.svg" width="250px" /><br>
+<img src="/src/main/resources/static/cities.svg" width="300px" /><br>
  <b>Projeto Cidades!!!</b> 
 </h4>
 <p align="center">
@@ -29,7 +29,7 @@ O projeto consiste em desenvolver uma API REST para digerir um arquivo CSV, cont
 
 Persistindo esses dados em uma tabela no banco de dados e disponibilizando para o usuário , diversos endpoints para consultas personalizadas.
 
-<img src="src/main/resources/digest/swagger-ui.png" /><br>
+<img src="/src/main/resources/static/swagger-ui.png" /><br>
 
 ### :floppy_disk: Instalação <br>
 O projeto foi feito utilizando-se o banco de dados `MySQL` , caso deseje alterar, mude as configurações no `application.properties`, e adicione o driver do seu banco na lista de dependências no `pom.xml`. Exemplo:
@@ -75,7 +75,7 @@ Após importa o projeto para sua IDE, basta ir até a classe `ProjetoCidadeAppli
 
 ### :memo: Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE.md) para mais detalhes.
 
 
 Feito com ❤️**Rafael Reis**:wave:
