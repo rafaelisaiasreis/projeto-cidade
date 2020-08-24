@@ -1,5 +1,5 @@
 <h4 align="center">
-<img src="src/main/resources/digest/cities.svg" width="250px" /><br>
+<img src="src/main/resources/static/cities.svg" width="250px" /><br>
  <b>Projeto Cidades!!!</b> 
 </h4>
 <p align="center">
@@ -29,7 +29,7 @@ O projeto consiste em desenvolver uma API REST para digerir um arquivo CSV, cont
 
 Persistindo esses dados em uma tabela no banco de dados e disponibilizando para o usuário , diversos endpoints para consultas personalizadas.
 
-<img src="src/main/resources/digest/swagger-ui.png" /><br>
+<img src="src/main/resources/static/swagger-ui.png" /><br>
 
 ### :floppy_disk: Instalação <br>
 
