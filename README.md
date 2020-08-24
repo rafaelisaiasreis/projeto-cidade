@@ -1,5 +1,5 @@
 <h4 align="center">
-<img src="/src/main/resources/static/cities.svg" width="300px" /><br>
+<img src="src/main/resources/static/cities.svg" width="250px" /><br>
  <b>Projeto Cidades!!!</b> 
 </h4>
 <p align="center">
@@ -29,10 +29,38 @@ O projeto consiste em desenvolver uma API REST para digerir um arquivo CSV, cont
 
 Persistindo esses dados em uma tabela no banco de dados e disponibilizando para o usuário , diversos endpoints para consultas personalizadas.
 
-<img src="/src/main/resources/static/swagger-ui.png" /><br>
+<img src="src/main/resources/static/swagger-ui.png" /><br>
 
 ### :floppy_disk: Instalação <br>
-O projeto foi feito utilizando-se o banco de dados `MySQL` , caso deseje alterar, mude as configurações no `application.properties`, e adicione o driver do seu banco na lista de dependências no `pom.xml`. Exemplo:
+
+### Instalando Docker
+Execute os passos a seguir caso não possua o docker e o docker-compose instalados.
+
+Digite no seu terminal:
+```
+sudo apt update
+sudo apt install docker.io -y
+docker --version
+```
+Instalação do curl:
+```
+sudo apt update
+sudo apt install curl -y
+curl --version
+```
+ 
+### Documentação Docker Compose
+https://docs.docker.com/compose/install
+### Releases Docker Compose:
+https://github.com/docker/compose/releases
+### Instalação do Docker Compose:
+```
+sudo apt update
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
+O projeto foi feito utilizando-se o banco de dados `MySQL` , caso já o possua instalado , e não deseje utilizar o **`Docker`** para montar o ambiente,  apenas substitua as informações no application.properties.
 
 **application.properties**
 ```
@@ -41,18 +69,17 @@ spring.datasource.url=jdbc:mysql://localhost:3306/<DATABASE>
 spring.datasource.username=<USERNAME>  
 spring.datasource.password=<PASSWORD>
 ```
-
-**pom.xml**
-```
-<dependency>  
- <groupId>mysql</groupId>  
- <artifactId>mysql-connector-java</artifactId>  
- <scope>runtime</scope>  
-</dependency>
-```
 :exclamation: Crie o database e faça os devidos apontamentos nas configurações, não é necessário criar a tabela, uma vez que o flyway se encarregará de criá-la para nós.
 
-:pencil2: **Confiurações Adicionais**
+Caso deseje utilizar o **`Docker`**, entre na pasta do projeto via terminal, onde se encontra o arquivo `docker-compose.yml`, e execute o comando:
+
+    sudo docker-compose up
+Ao final do processo , seu ambiente com MySQL deverá estar montado . É possível que a porta apontada dentro do arquivo `docker-compose.yml` já esteja em uso no sua máquina, se for este o caso , edite o arquivo , mudando o apontamento para uma porta disponível.
+```
+ports:
+-  "<altere-essa-porta>:3306"
+```
+:pencil2: **Configurações Adicionais**
 O processo de digest do arquivo CSV,  pode ser configurado no `application.properties`:
 ```
 #Digest Configuration  
@@ -65,6 +92,9 @@ projeto.cidade.load-city-table=true
 :minidisc: **RUN**
 Após importa o projeto para sua IDE, basta ir até a classe `ProjetoCidadeApplication`e executar o método main como Java Application.
 
+:orange_book:**SWAGGER**
+Para acessar a documentação da aplicação , após a mesma estar em execução , acesse o link : [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
 ### :recycle: Como contribuir
 
 - Fork esse repositório;
@@ -75,7 +105,7 @@ Após importa o projeto para sua IDE, basta ir até a classe `ProjetoCidadeAppli
 
 ### :memo: Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE.md) para mais detalhes.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
 
 Feito com ❤️**Rafael Reis**:wave:
